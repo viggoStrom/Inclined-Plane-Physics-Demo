@@ -1,0 +1,26 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: #363636;
+    color: whitesmoke;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#canvas {
+    width: 70%;
+    aspect-ratio: 16/10;
+    
+    margin: 3rem;
+    padding: 0;
+
+    border-radius: 1rem;
+
+    background-color: rgb(161, 161, 255);
+}
