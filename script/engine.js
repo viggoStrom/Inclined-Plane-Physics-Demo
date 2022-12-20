@@ -20,31 +20,30 @@ class engine {
         });
     }
 
-    applyGravity = () => {
-        this.bodies.forEach(box => {
-            box.velocity.y += this.gravity
-        });
-    }
-
     setboxAngles = () => {
         this.bodies.forEach(box => {
             box.angle = this.plane.angle
         });
     }
 
-    calculateVelocities = () => {
+    forces = () => {
+        this.bodies.forEach(box => {
+            let Fg = box.mass * this.gravity
+            let F1 = Math.sinD(this.angle) * Fg
+            let F2 = Math.cosD(this.angle) * Fg
+            let Ff = this.mu * F2
 
+            let downVelocity = 
+        });
     }
 
     applyVelocities = () => {
         this.bodies.forEach(box => {
-            box.position.x += box.velocity.x
-            box.position.y += box.velocity.y
+
         });
     }
 
     update = () => {
-        this.applyGravity()
         this.applyVelocities()
         this.setboxAngles()
 
