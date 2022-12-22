@@ -3,9 +3,19 @@
 
 class inclinedPlane {
     constructor(angle) {
-        this.angle = angle
+        if (angle > 40) {
+            this.angle = 40
+        }
+        else if (angle < 0) {
+            this.angle = 0
+        }
+        else {
+            this.angle = angle
+        }
+
+        // dont touch. It finally works
         this.startHeight = canvas.height * 9 / 10
-        this.endHeight = this.startHeight * (1 - Math.tan(angle * (Math.PI / 180)))
+        this.endHeight = this.startHeight - canvas.width * Math.tanD(this.angle)
     }
 
     draw = () => {

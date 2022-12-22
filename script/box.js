@@ -9,16 +9,16 @@ class body {
         this.angle = 0
 
         this.position = {}
-        this.position.x = 1350
-        this.position.y = 300
+        this.position.x = 1360
+        this.position.y = 675
 
         this.velocity = {}
         this.velocity.x = 0
         this.velocity.y = 0
 
         this.size = {}
-        this.size.height = 100
         this.size.width = 140
+        this.size.height = 100
     }
 
     // 
@@ -33,6 +33,7 @@ class body {
         let x = this.position.x
         let y = this.position.y
 
+
         ctx.fillStyle = "whitesmoke"
         ctx.beginPath()
 
@@ -43,17 +44,17 @@ class body {
 
         // p2
         let p2x = x + this.size.width * Math.cosD(v)
-        let p2y = y - this.size.width * Math.sinD(v)
+        let p2y = y - this.size.height * Math.sinD(v)
         ctx.lineTo(p2x, p2y)
 
         // p3
-        let p3x = x
-        let p3y = y
+        let p3x = x + this.size.width * Math.cosD(v) - this.size.height * Math.cosD(u)
+        let p3y = y - this.size.height * Math.sinD(u) - this.size.height * Math.sinD(v)
         ctx.lineTo(p3x, p3y)
 
         // p4
-        let p4x = x
-        let p4y = y
+        let p4x = x - this.size.height * Math.cosD(u)
+        let p4y = y - this.size.height * Math.sinD(u)
         ctx.lineTo(p4x, p4y)
 
         ctx.fill()
@@ -62,12 +63,19 @@ class body {
     text = () => {
         this.velocity.total = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2)
 
-
         ctx.fillStyle = "white"
         ctx.font = "50px courier new"
-        ctx.fillText(`${this.mass} kg`, this.position.x, this.position.y - this.size.height - 40 * 3)
-        ctx.fillText(`${this.velocity.total.toFixed(1)} m/s`, this.position.x, this.position.y - this.size.height - 40 * 2)
-        ctx.fillText(`${this.mu.toFixed(1)} μ`, this.position.x, this.position.y - this.size.height - 40 * 1)
+
+        let spacing = 40
+        let heightOffset = 10
+
+        let mass = this.mass
+        let vel = this.velocity.total.toFixed(1)
+        let mu = this.mu.toFixed(1)
+
+        ctx.fillText(`${mass} kg`, this.position.x, this.position.y - this.size.height - spacing * 3 - heightOffset)
+        ctx.fillText(`${vel} m/s`, this.position.x, this.position.y - this.size.height - spacing * 2 - heightOffset)
+        ctx.fillText(`${mu} μ   `, this.position.x, this.position.y - this.size.height - spacing * 1 - heightOffset)
     }
 
     update = () => {

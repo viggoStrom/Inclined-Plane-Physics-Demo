@@ -6,10 +6,6 @@ class engine {
         this.plane = plane
         this.bodies = bodies
         this.gravity = .5
-
-        this.bodies.forEach(box => {
-            box.angle = this.plane.angle
-        });
     }
 
     updateChildren = () => {
