@@ -16,7 +16,7 @@ class body {
         this.velocity.x = 0
         this.velocity.y = 0
         console.log(this.velocity);
-
+        
         // has to be a square for some reason :<
         this.size = {}
         this.size.width = 100
