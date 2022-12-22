@@ -1,5 +1,5 @@
 Math.sinD = (degree) => {
-    radian = degree / (180 / Math.PI)
+    radian = degree * (Math.PI / 180)
     value = Math.sin(radian)
     return value
 }
@@ -11,7 +11,7 @@ Math.asinD = (value) => {
 }
 
 Math.cosD = (degree) => {
-    radian = degree / (180 / Math.PI)
+    radian = degree * (Math.PI / 180)
     value = Math.cos(radian)
     return value
 }
@@ -23,7 +23,7 @@ Math.acosD = (value) => {
 }
 
 Math.tanD = (degree) => {
-    radian = degree / (180 / Math.PI)
+    radian = degree * (Math.PI / 180)
     value = Math.tan(radian)
     return value
 }

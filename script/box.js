@@ -10,14 +10,16 @@ class body {
 
         this.position = {}
         this.position.x = 1360
-        this.position.y = 675
+        this.position.y = 300
 
         this.velocity = {}
         this.velocity.x = 0
         this.velocity.y = 0
+        console.log(this.velocity);
 
+        // has to be a square for some reason :<
         this.size = {}
-        this.size.width = 140
+        this.size.width = 100
         this.size.height = 100
     }
 
@@ -28,50 +30,51 @@ class body {
     // 
 
     draw = () => {
-        let v = this.angle
-        let u = 90 - v
-        let x = this.position.x
-        let y = this.position.y
+        const v = this.angle
+        const u = 90 - v
+        const x = this.position.x
+        const y = this.position.y
 
 
         ctx.fillStyle = "whitesmoke"
         ctx.beginPath()
 
         // p1
-        let p1x = x
-        let p1y = y
+        const p1x = x
+        const p1y = y
         ctx.moveTo(p1x, p1y)
 
         // p2
-        let p2x = x + this.size.width * Math.cosD(v)
-        let p2y = y - this.size.height * Math.sinD(v)
+        const p2x = x + this.size.width * Math.cosD(v)
+        const p2y = y - this.size.height * Math.sinD(v)
         ctx.lineTo(p2x, p2y)
 
         // p3
-        let p3x = x + this.size.width * Math.cosD(v) - this.size.height * Math.cosD(u)
-        let p3y = y - this.size.height * Math.sinD(u) - this.size.height * Math.sinD(v)
+        const p3x = p2x - this.size.height * Math.cosD(u)
+        const p3y = p2y - this.size.height * Math.sinD(u)
         ctx.lineTo(p3x, p3y)
 
         // p4
-        let p4x = x - this.size.height * Math.cosD(u)
-        let p4y = y - this.size.height * Math.sinD(u)
+        const p4x = x - this.size.height * Math.cosD(u)
+        const p4y = y - this.size.height * Math.sinD(u)
         ctx.lineTo(p4x, p4y)
 
         ctx.fill()
     }
 
     text = () => {
-        this.velocity.total = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2)
 
         ctx.fillStyle = "white"
         ctx.font = "50px courier new"
 
-        let spacing = 40
-        let heightOffset = 10
+        const spacing = 40
+        const heightOffset = 10
 
-        let mass = this.mass
-        let vel = this.velocity.total.toFixed(1)
-        let mu = this.mu.toFixed(1)
+        this.velocity.total = Math.sqrt(this.velocity.x ** 2 + this.velocity.y ** 2)
+
+        const mass = this.mass
+        const vel = this.velocity.total.toFixed(1)
+        const mu = this.mu.toFixed(1)
 
         ctx.fillText(`${mass} kg`, this.position.x, this.position.y - this.size.height - spacing * 3 - heightOffset)
         ctx.fillText(`${vel} m/s`, this.position.x, this.position.y - this.size.height - spacing * 2 - heightOffset)
@@ -81,5 +84,6 @@ class body {
     update = () => {
         this.draw()
         this.text()
+        // console.log(this.position.x, this.position.y, this.angle);
     }
 }
