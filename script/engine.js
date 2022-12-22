@@ -26,26 +26,23 @@ class engine {
         });
     }
 
-    forces = () => {
+    forcesAndVelocity = () => {
         this.bodies.forEach(box => {
             let Fg = box.mass * this.gravity
             let F1 = Math.sinD(this.angle) * Fg
             let F2 = Math.cosD(this.angle) * Fg
             let Ff = this.mu * F2
 
-            let downVelocity = F1 / this.mass
-            let upVelocity = Ff / this.mass
-        });
-    }
+            F1 -= Ff
 
-    applyVelocities = () => {
-        this.bodies.forEach(box => {
-
+            box.F1 += box.velocity.x
+            box.F2 += box.velocity.y
         });
     }
 
     update = () => {
-        this.applyVelocities()
+        this.forcesAndVelocity()
+
         this.setboxAngles()
 
         this.updateChildren()

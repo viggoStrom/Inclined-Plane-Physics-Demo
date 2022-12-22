@@ -8,7 +8,7 @@ canvas.height = 1000
 canvas.width = canvas.height * 16 / 10
 
 const plane = new inclinedPlane(15)
-const box = new body(10, .5)
+const box = new body(10, 0.5)
 const physics = new engine(plane, box)
 
 const frame = () => {
