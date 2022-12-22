@@ -33,7 +33,8 @@ class engine {
             let F2 = Math.cosD(this.angle) * Fg
             let Ff = this.mu * F2
 
-            let downVelocity = 
+            let downVelocity = F1 / this.mass
+            let upVelocity = Ff / this.mass
         });
     }
 
