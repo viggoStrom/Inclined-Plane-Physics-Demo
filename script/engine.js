@@ -72,17 +72,15 @@ class engine {
         });
     }
 
-    placeBoxes = () => {
-        this.bodies.forEach(box => {
-            box.position.x = Math.cosD(this.plane.angle) * canvas.width * .8
-            box.position.y = Math.sinD(this.plane.angle) * canvas.height * .8
-        });
-    }
+    // placeBoxes = () => {
+    //     this.bodies.forEach(box => {
+    //         box.position.x = Math.cosD(this.plane.angle + 15) * canvas.width * .8
+    //         box.position.y = Math.sinD(this.plane.angle + 15) * canvas.height
+    //     });
+    // }
 
     initiate = () => {
-        if (!canvas.hasInitiated) {
-            this.placeBoxes()
-        }
+        // this.placeBoxes()
     }
 
     update = () => {
@@ -90,8 +88,6 @@ class engine {
 
         this.forcesAndVelocity()
         this.applyVelocities()
-
-
 
         this.updateChildren()
     }
