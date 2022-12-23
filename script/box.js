@@ -15,7 +15,7 @@ class body {
         this.velocity = {}
         this.velocity.x = 0
         this.velocity.y = 0
-        
+
         // has to be a square for some reason :<
         this.size = {}
         this.size.width = 100
@@ -80,7 +80,27 @@ class body {
         ctx.fillText(`${mu} μ   `, this.position.x, this.position.y - this.size.height - spacing * 1 - heightOffset)
     }
 
+    arrows = () => {
+        const centerX = this.position.x + this.size.width / 2
+        const centerY = this.position.y - this.size.height / 2
+
+        ctx.strokeStyle = "red"
+        ctx.lineWidth = 10
+        ctx.lineCap = "round"
+
+        ctx.beginPath()
+        ctx.moveTo(centerX, centerY)
+        ctx.lineTo(centerX + this.velocity.x * 15, centerY)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(centerX, centerY)
+        ctx.lineTo(centerX, centerY + this.velocity.y * 15)
+        ctx.stroke()
+    }
+
     update = () => {
+        this.arrows()
         this.draw()
         this.text()
     }

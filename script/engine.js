@@ -40,6 +40,9 @@ class engine {
                 box.velocity.x += F1
                 box.velocity.y += F2
             }
+            else if (box.collided) {
+
+            }
         });
     }
 
@@ -51,9 +54,11 @@ class engine {
 
     checkCollisionWithPlane = () => {
         this.bodies.forEach(box => {
-            if (box.position.y >= this.planeHeightAt(box.position.x + box.size.width)) {
+            if (!box.collided && box.position.y >= this.planeHeightAt(box.position.x + box.size.width)) {
                 box.collided = true
                 this.setboxAngles()
+                box.velocity.x = 0
+                box.velocity.y = 0
             }
         });
     }
@@ -67,11 +72,26 @@ class engine {
         });
     }
 
+    placeBoxes = () => {
+        this.bodies.forEach(box => {
+            box.position.x = Math.cosD(this.plane.angle) * canvas.width * .8
+            box.position.y = Math.sinD(this.plane.angle) * canvas.height * .8
+        });
+    }
+
+    initiate = () => {
+        if (!canvas.hasInitiated) {
+            this.placeBoxes()
+        }
+    }
+
     update = () => {
         this.checkCollisionWithPlane()
 
         this.forcesAndVelocity()
         this.applyVelocities()
+
+
 
         this.updateChildren()
     }
