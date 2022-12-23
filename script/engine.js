@@ -5,7 +5,7 @@ class engine {
     constructor(plane, ...bodies) {
         this.plane = plane
         this.bodies = bodies
-        this.gravity = .01
+        this.gravity = .05
     }
 
     updateChildren = () => {
@@ -29,23 +29,30 @@ class engine {
             const F2 = Math.cosD(box.angle) * Fg
             const Ff = box.mu * F2
 
-            F1 -= Ff
+            if (Ff > F1) {
+                F1 = 0
+            }
+            else if (F1 > Ff) {
+                F1 -= Ff
+            }
 
-            console.log(F1, F2);
-            box.velocity.x += F1
-            box.velocity.y += F2
+            if (!box.collided) {
+                box.velocity.x += F1
+                box.velocity.y += F2
+            }
         });
     }
 
     planeHeightAt = (x) => {
-        const k = -0.625
+        const k = -Math.sinD(this.plane.angle)
         const m = plane.startHeight
         return k * x + m
     }
 
-    checkCollision = () => {
+    checkCollisionWithPlane = () => {
         this.bodies.forEach(box => {
-            if (box.position.y <= this.planeHeightAt(box.position.x + box.size.width)) {
+            if (box.position.y >= this.planeHeightAt(box.position.x + box.size.width)) {
+                box.collided = true
                 this.setboxAngles()
             }
         });
@@ -53,14 +60,16 @@ class engine {
 
     applyVelocities = () => {
         this.bodies.forEach(box => {
-            box.position.x += box.velocity.x
-            box.position.y += box.velocity.y
+            if (!box.collided) {
+                box.position.x += box.velocity.x
+                box.position.y += box.velocity.y
+            }
         });
     }
 
     update = () => {
-        // console.log(this.bodies[0].velocity);
-        this.checkCollision()
+        this.checkCollisionWithPlane()
+
         this.forcesAndVelocity()
         this.applyVelocities()
 

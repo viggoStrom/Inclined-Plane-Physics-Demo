@@ -15,7 +15,6 @@ class body {
         this.velocity = {}
         this.velocity.x = 0
         this.velocity.y = 0
-        console.log(this.velocity);
         
         // has to be a square for some reason :<
         this.size = {}
@@ -84,6 +83,5 @@ class body {
     update = () => {
         this.draw()
         this.text()
-        // console.log(this.position.x, this.position.y, this.angle);
     }
 }
