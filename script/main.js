@@ -9,8 +9,8 @@ canvas.width = canvas.height * 16 / 10
 
 canvas.hasInitiated = false
 
-const plane = new inclinedPlane(20)
-const box = new body(10, 0.5)
+const plane = new inclinedPlane(15)
+const box = new body(10, 0.1)
 const physics = new engine(plane, box)
 
 const initiate = () => {

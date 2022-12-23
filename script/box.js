@@ -90,12 +90,12 @@ class body {
 
         ctx.beginPath()
         ctx.moveTo(centerX, centerY)
-        ctx.lineTo(centerX + this.velocity.x * 15, centerY)
+        ctx.lineTo(centerX + this.velocity.x * 10, centerY)
         ctx.stroke()
 
         ctx.beginPath()
         ctx.moveTo(centerX, centerY)
-        ctx.lineTo(centerX, centerY + this.velocity.y * 15)
+        ctx.lineTo(centerX, centerY + this.velocity.y * 20)
         ctx.stroke()
     }
 

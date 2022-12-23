@@ -37,11 +37,12 @@ class engine {
             }
 
             if (!box.collided) {
-                box.velocity.x += F1
+                box.velocity.x -= F1
                 box.velocity.y += F2
             }
             else if (box.collided) {
-
+                box.velocity.x -= F1 / Math.sinD(box.angle)
+                box.velocity.y += F1 / Math.cosD(box.angle)
             }
         });
     }
@@ -65,10 +66,8 @@ class engine {
 
     applyVelocities = () => {
         this.bodies.forEach(box => {
-            if (!box.collided) {
-                box.position.x += box.velocity.x
-                box.position.y += box.velocity.y
-            }
+            box.position.x += box.velocity.x
+            box.position.y += box.velocity.y
         });
     }
 
