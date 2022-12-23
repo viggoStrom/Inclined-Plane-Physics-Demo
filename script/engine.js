@@ -5,7 +5,7 @@ class engine {
     constructor(plane, ...bodies) {
         this.plane = plane
         this.bodies = bodies
-        this.gravity = .05
+        this.gravity = .08
     }
 
     updateChildren = () => {
@@ -28,6 +28,11 @@ class engine {
             let F1 = Math.sinD(box.angle) * Fg
             const F2 = Math.cosD(box.angle) * Fg
             const Ff = box.mu * F2
+
+            box.force.F1.x += F1 / Math.sinD(box.angle)
+            box.force.F1.y += F1 / Math.cosD(box.angle)
+            box.force.Ff.x += Ff / Math.sinD(box.angle)
+            box.force.Ff.y += Ff / Math.cosD(box.angle)
 
             if (Ff > F1) {
                 F1 = 0
@@ -80,6 +85,21 @@ class engine {
 
     initiate = () => {
         // this.placeBoxes()
+    }
+
+    adjustPlane = (type) => {
+        switch (type) {
+            case "angleUp":
+                this.plane.angle += 1
+                break;
+
+            case "angleDown":
+                this.plane.angle -= 1
+                break;
+
+            default:
+                break;
+        }
     }
 
     update = () => {

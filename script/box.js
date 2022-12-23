@@ -20,6 +20,10 @@ class body {
         this.size = {}
         this.size.width = 100
         this.size.height = 100
+
+        this.force = {}
+        this.force.F1 = {}
+        this.force.Ff = {}
     }
 
     // 
@@ -83,19 +87,35 @@ class body {
     arrows = () => {
         const centerX = this.position.x + this.size.width / 2
         const centerY = this.position.y - this.size.height / 2
+        const multiplier = 300
 
-        ctx.strokeStyle = "red"
+        ctx.strokeStyle = "#aa0000aa"
         ctx.lineWidth = 10
         ctx.lineCap = "round"
 
+        // x axis aligned force
+        // ctx.beginPath()
+        // ctx.moveTo(centerX, centerY)
+        // ctx.lineTo(centerX + this.velocity.x * 15 + 30, centerY)
+        // ctx.stroke()
+
+        // y axis aligned force
+        // ctx.beginPath()
+        // ctx.moveTo(centerX, centerY)
+        // ctx.lineTo(centerX, centerY + this.velocity.y * 15 + 30)
+        // ctx.stroke()
+        // plane aligned velocity F1
+        ctx.strokeStyle = "#00aa00aa"
         ctx.beginPath()
         ctx.moveTo(centerX, centerY)
-        ctx.lineTo(centerX + this.velocity.x * 10, centerY)
+        ctx.lineTo(centerX - this.force.F1.x * multiplier, centerY + this.force.F1.y * multiplier)
         ctx.stroke()
 
+        // plane aligned velocity Ff
+        ctx.strokeStyle = "#aa0000aa"
         ctx.beginPath()
         ctx.moveTo(centerX, centerY)
-        ctx.lineTo(centerX, centerY + this.velocity.y * 20)
+        ctx.lineTo(centerX + this.force.Ff.x * multiplier, centerY - this.force.Ff.y * multiplier)
         ctx.stroke()
     }
 
